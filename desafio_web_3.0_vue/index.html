@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgBody: '#121212',
+                        bgTecnologias: '#27272A',
+                        borderTecnologias: '#9D4B00',
+                        bgLogo: 'rgba(218, 218, 218, 0.33)',
+                    },
+                    width: {
+                        containerPadrao: '793px',
+                        containerLogo: '190px',
+                    },
+                    height: {
+                        heightBody: '900px',
+                        heightHeader: '72px',
+                        heightUl: '173px',
+                        heightLogo: '40px',
+                    },
+                    spacing: {
+                        pdLogo: '6px 20px 6.18px 20px',
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Document</title>
+    <style>
+       
+        .molduraLogo img {
+            width: 150px;
+            /* height: 27.82px ;  */
+            /* border: 1px solid red;  */
+            object-fit: contain;
+            object-position: 0px -11px;
+        }
+    </style>
+</head>
+
+<body class="bg-bgBody h-heightBody text-white">
+    <header class="header h-heightHeader bg-bgTecnologias flex justify-center items-center p-0">
+        <div class="molduraLogo w-containerLogo h-heightLogo rounded-lg bg-bgLogo p-pdLogo m-0">
+            <img src="./img/logo_stackx.png" alt="">
+        </div>
+    </header>
+    <main id="app">
+        <section class="w-full flex flex-col items-center p-0 mt-32">
+            <h1 class="w-containerPadrao text-center text-4xl font-semibold">Desafio Web 3.0 - VueJS e Tailwind</h1>
+            <p v-html="frase" class="w-containerPadrao text-center text-2xl mt-10"></p>
+        </section>
+        <section class="w-full flex justify-center p-0 mt-16">
+            <ul class="w-containerPadrao h-heightUl list-disc px-14 py-6 list-inside bg-bgTecnologias border border-borderTecnologias rounded-lg flex flex-col content-between flex-wrap">
+                <li class="text-xl font-semibold p-0 w-fit" v-for="linguagem in tecnologias">{{linguagem}}</li>
+            </ul>
+        </section>
+        <section class="w-full flex justify-center p-0 pb-7 mt-80 mb-6">
+            <pais
+                v-on:seleciona-idioma="mudar('Olá. Meu nome é Diego Sampaio, e sou Desenvolvedor front-end. Tecnologias que tenho experiência:')"
+                idioma="Português" bandeira="./img/bandeira_brasil.png"></pais>
+            <pais
+                v-on:seleciona-idioma="mudar('Hello. My name is Diego Sampaio, and I\'m a front-end Developer. Technologies I have experience:')"
+                idioma="Inglês" bandeira="./img/bandeira_eua.png"></pais>
+            <pais
+                v-on:seleciona-idioma="mudar('Hola. Mi nombre es Diego Sampaio, y soy Desarrollador front-end. Tecnologías en las que tengo experiencia:')"
+                idioma="Espanhol" bandeira="./img/bandeira_espanha.png"></pais>
+        </section>
+    </main>
+    <script>
+        Vue.component("pais", {
+            props: ['frase', 'idioma', 'bandeira'],
+            template:
+                    `<div>
+                        <button style="width: 133px; higth: 51px" class="bg-bgTecnologias p-3 mr-12 flex justify-center items-center rounded-lg" v-on:click="$emit('seleciona-idioma')">
+                            <img class="mr-2":src="bandeira" width="15px"/>{{idioma}}
+                        </button>
+                    </div>`
+            }
+        );
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                frase: "Olá. Meu nome é Diego Sampaio, e sou Desenvolvedor front-end. Tecnologias que tenho experiência:",
+                tecnologias: ["JavaScript", "ReactJS", "VueJS", "AngularJS", "PHP", "Styled Components", "HTML", "CSS", "Tailwind CSS", "SASS",]
+            },
+            methods: {
+                mudar: function (frase) {
+                    this.frase = frase
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
