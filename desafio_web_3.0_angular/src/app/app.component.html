@@ -1,0 +1,16 @@
+
+<div>
+  <h1>{{title}}</h1>
+  <p>{{frase}}</p>
+  <ul>
+    <li *ngFor="let linguagem of tecnologias">
+      {{linguagem}}
+    </li>
+  </ul>
+  
+  <!-- <button (click)="alterarIdioma('Frase em Inglês')">Inglês</button> -->
+  <button-idioma (click) = 'alterarIdioma("Frase em Português")' bandeira="../assets/img/bandeira_brasil.png" idioma="Português"></button-idioma>
+  <button-idioma (click) = 'alterarIdioma("Frase em Inglês")'  bandeira="../assets/img/bandeira_eua.png" idioma="Inglês"></button-idioma>
+  <button-idioma (click) = 'alterarIdioma("Frase em Espanhol")'  bandeira="../assets/img/bandeira_espanha.png" idioma="Espanhol"></button-idioma>
+</div>
+
